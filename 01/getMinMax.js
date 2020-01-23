@@ -14,6 +14,20 @@
  * @param  {string} input входная строка
  * @return {{min: number, max: number}} объект с минимумом и максимумом
  */
-export function getMinMax(input) {
+function getMinMax(input) {
 
 }
+
+/**
+ * Напишите обработчик, срабатывающий при сабмите формы,
+ * передающий значение поля str в качестве аргумента в функцию getMinMax.
+ *
+ * Результат работы функции getMinMax вывести в блок с id="result"
+ *
+ */
+window.addEventListener('load', function() {
+  const form = document.querySelector('form');
+  form.addEventListener('submit', function() {
+    
+  })
+});
