@@ -19,5 +19,11 @@
  * @return {Function}
  */
 export function limitCalls(fn, maxCalls) {
-
+  let callsCount = 0;
+  return function() {
+    if (callsCount < maxCalls) {
+      callsCount += 1;
+      return fn();
+    }
+  };
 }
