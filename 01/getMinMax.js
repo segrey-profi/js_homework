@@ -15,7 +15,20 @@
  * @return {{min: number, max: number}} объект с минимумом и максимумом
  */
 function getMinMax(input) {
+  // Если я правильно понял условия, то при отсутствии чисел будет такой результат
+  const result = {min: -Infinity, max: Infinity};
+  if (!input) return result;
 
+  input.split(/[\s,;:"]+/).forEach(s => {
+    if (!s || s === '.') return;
+    const n = Number(s.startsWith('.') ? s.substr(1) : s);
+    if (!n) return;
+    if (result.min === -Infinity || n < result.min) result.min = n;
+    if (result.max === Infinity || n > result.max) result.max = n;
+  });
+
+  if (result.min === result.max) result.max = Infinity;
+  return result;
 }
 
 /**
@@ -27,7 +40,10 @@ function getMinMax(input) {
  */
 window.addEventListener('load', function() {
   const form = document.querySelector('form');
-  form.addEventListener('submit', function() {
-    
-  })
+  form.addEventListener('submit', function(event) {
+    event.preventDefault();
+    const text = form.elements['str'].value;
+    const {min, max} = getMinMax(text);
+    document.getElementById('result').innerHTML = `{min: ${min}, max: ${max}}`;
+  });
 });
