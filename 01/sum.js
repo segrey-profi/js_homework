@@ -12,5 +12,7 @@
  * @returns а это уже сами решите
  */
 export function sum(x) {
-
+  return x === undefined ? 0 : function(y) {
+    return y === undefined ? x : sum(x + y);
+  };
 }
