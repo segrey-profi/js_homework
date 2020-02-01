@@ -22,7 +22,7 @@ function getMinMax(input) {
   input.split(/[\s,;:"]+/).forEach(s => {
     if (!s || s === '.') return;
     const n = Number(s.startsWith('.') ? s.substr(1) : s);
-    if (!n) return;
+    if (isNaN(n)) return;
     if (result.min === -Infinity || n < result.min) result.min = n;
     if (result.max === Infinity || n > result.max) result.max = n;
   });
