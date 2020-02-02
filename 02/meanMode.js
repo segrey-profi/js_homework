@@ -20,5 +20,31 @@
  * @return {boolean}
  */
 export function meanMode(numbers) {
+  if (numbers.length === 0) return false;
+  if (numbers.length === 1) return true;
 
+  let sum = 0;
+  let maxCount = 0;
+  let freqNumber = NaN;
+  const countMap = new Map();
+  for (let n of numbers) {
+    sum += n;
+    const count = (countMap.get(n) || 0) + 1;
+    countMap.set(n, count);
+    if (count > maxCount) {
+      maxCount = count;
+      freqNumber = n;
+    }
+  }
+
+  const avg = sum / numbers.length;
+  if (avg !== freqNumber) return false;
+
+  countMap.delete(freqNumber);
+
+  for (let c in countMap.values()) {
+    if (c === maxCount) return false;
+  }
+
+  return true;
 }
