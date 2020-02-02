@@ -12,5 +12,9 @@
  * @return {number[]} массив уникальных значений, отсортированный по возрастанию
  */
 export function getUnique(input) {
-
+  const output = [];
+  input.forEach(n => {
+    if (!output.includes(n)) output.push(n);
+  });
+  return output.sort((n1, n2) => n1 - n2);
 }
