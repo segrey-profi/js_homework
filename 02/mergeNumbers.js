@@ -12,5 +12,7 @@
  * @param number
  */
 export function mergeNumbers(number) {
-
+  const figures = `${number}`.replace(/[^0-9]+/g, '').split('');
+  const sum = figures.reduce((sum, c) => (sum + Number(c)), 0);
+  return sum > 9 ? mergeNumbers(sum) : sum;
 }
