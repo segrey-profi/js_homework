@@ -11,5 +11,25 @@
  * @return {Promise} промис с нужным поведением
  */
 export const rejectOnTimeout = (promise, ms) => new Promise((resolve, reject) => {
+  let hasFinished = false;
 
+  function processIfRunning(fn) {
+    if (hasFinished) return;
+    hasFinished = true;
+    fn();
+  }
+
+  function rejectIfRunning(err) {
+    processIfRunning(() => { reject(err); });
+  }
+
+  promise.then(res => {
+    processIfRunning(() => { resolve(res); });
+  }).catch(err => {
+    rejectIfRunning(err);
+  });
+
+  setTimeout(() => {
+    rejectIfRunning(Error('timeout_error'));
+  }, ms);
 });
